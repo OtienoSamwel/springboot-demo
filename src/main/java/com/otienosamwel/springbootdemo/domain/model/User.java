@@ -1,19 +1,35 @@
 package com.otienosamwel.springbootdemo.domain.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
+@Entity
 public final class User {
 
-    private final String FirstName;
-    private final String LastName;
-    private final int age;
-    private final String occupation;
+    @Id
+    private long id;
+    private String FirstName;
+    private String LastName;
+    private int age;
+    private String occupation;
 
-    public User(String firstName, String lastName, int age, String occupation) {
+
+
+    public User(long id, String firstName, String lastName, int age, String occupation) {
+        this.id = id;
         FirstName = firstName;
         LastName = lastName;
         this.age = age;
         this.occupation = occupation;
+    }
+
+    public User() {
+
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getFirstName() {
