@@ -1,20 +1,39 @@
 package com.otienosamwel.springbootdemo.domain.model;
 
+import javax.persistence.*;
 import java.time.Duration;
 import java.util.Objects;
 
-public final class LoanRequest {
-    private final int amount;
-    private final User borrower;
-    private final Duration repaymentTerm;
-    private final double interestRate;
+@Entity
+public final class LoanApplication {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    private int amount;
+    @ManyToOne
+    private User borrower;
+    private int repaymentTerm;
+    private double interestRate;
 
-    public LoanRequest(int amount, String user, int age, String occupation, User borrower, Duration repaymentTerm, double interestRate) {
+    public LoanApplication() {
+    }
+
+    public LoanApplication(
+            int amount,
+            User borrower,
+            int repaymentTerm,
+            double interestRate) {
+
         this.amount = amount;
         this.borrower = borrower;
         this.repaymentTerm = repaymentTerm;
         this.interestRate = interestRate;
+    }
+
+
+    public long getId() {
+        return id;
     }
 
     public int getAmount() {
@@ -25,7 +44,7 @@ public final class LoanRequest {
         return borrower;
     }
 
-    public Duration getRepaymentTerm() {
+    public int getRepaymentTerm() {
         return repaymentTerm;
     }
 
@@ -37,7 +56,7 @@ public final class LoanRequest {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LoanRequest that = (LoanRequest) o;
+        LoanApplication that = (LoanApplication) o;
         return amount == that.amount &&
                 Double.compare(that.interestRate, interestRate) == 0 &&
                 Objects.equals(borrower, that.borrower) &&
@@ -58,6 +77,7 @@ public final class LoanRequest {
                 ", interestRate=" + interestRate +
                 '}';
     }
+
 }
 
 
